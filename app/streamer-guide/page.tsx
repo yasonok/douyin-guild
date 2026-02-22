@@ -215,5 +215,39 @@ Canva是一個線上設計工具，可以用來製作直播封面、海報、宣
       ]
     }
   ];
-  // Remaining chapters content would go here
+
+  return (
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(180deg, #0f0f23 0%, #1a1a2e 100%)', color: 'white', padding: '40px 20px' }}>
+      <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+        <h1 style={{ textAlign: 'center', fontSize: 'clamp(28px, 5vw, 42px)', fontWeight: '800', marginBottom: '10px' }}>TikTok 主播攻略</h1>
+        <p style={{ textAlign: 'center', color: 'rgba(255,255,255,0.6)', marginBottom: '40px' }}>從小白到專業主播的完整指南</p>
+        
+        {chapters.map((chapter, chapterIndex) => (
+          <div key={chapterIndex} style={{ marginBottom: '30px', background: 'rgba(255,255,255,0.03)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden' }}>
+            <button 
+              onClick={() => setExpandedChapter(expandedChapter === chapterIndex ? null : chapterIndex)}
+              style={{ width: '100%', padding: '20px 25px', background: 'transparent', border: 'none', color: 'white', fontSize: '18px', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <span style={{ fontSize: '24px' }}>{chapter.icon}</span>
+                {chapter.title}
+              </span>
+              <span style={{ transform: expandedChapter === chapterIndex ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}>▼</span>
+            </button>
+            
+            {expandedChapter === chapterIndex && (
+              <div style={{ padding: '0 25px 25px 25px', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                {chapter.sections.map((section, sectionIndex) => (
+                  <div key={sectionIndex} style={{ marginTop: '20px' }}>
+                    <h3 style={{ color: '#ff6b6b', fontSize: '16px', marginBottom: '10px', fontWeight: '600' }}>{section.title}</h3>
+                    <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '14px', lineHeight: '1.8', whiteSpace: 'pre-wrap', textAlign: 'justify' }}>{section.content}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
